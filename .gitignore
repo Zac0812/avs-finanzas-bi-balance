@@ -37,3 +37,4 @@ Thumbs.db
 
 # Power BI (archivo pesado, no debe subirse al repo)
 *.pbix
+Notas.md
