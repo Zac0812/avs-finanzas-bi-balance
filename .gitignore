@@ -1,0 +1,39 @@
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Variables de entorno y credenciales (Seguridad)
+.env
+credenciales/*.json
+!credenciales/credsDriveTest.json
+*.pem
+
+# Archivos de caché y Python
+__pycache__/
+*.py[cod]
+
+# Jupyter (los checkpoints pueden conservar versiones viejas de outputs/datos)
+.ipynb_checkpoints/
+
+# Salidas generadas por el ETL (ver test/BalanceGeneralPruebas.ipynb)
+Resumen.xlsx
+
+# Datos temporales o locales de prueba
+#test/*
+test/Guía de Referencia_ Git, GitHub y Estructura ETL.pdf
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Logs de ejecución del pipeline
+logs/
+
+# VS Code / Sistema
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Power BI (archivo pesado, no debe subirse al repo)
+*.pbix

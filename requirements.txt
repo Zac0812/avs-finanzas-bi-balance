@@ -1,0 +1,7 @@
+pandas
+gspread
+google-auth
+gspread-dataframe
+pyodbc
+sqlalchemy
+python-dotenv
