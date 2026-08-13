@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Construir un reporte de Power BI que muestre el **Balance General** de la compañía bajo la clasificación de **Comité**, distinta del catálogo de cuentas nativo de NetSuite.
+Construir un reporte de Power BI que muestre el **Balance General** de la compañía bajo la clasificación de **Comité**, distinta del catálogo de cuentas nativo de NetSuite. 
 
 ## Fuentes de información
 
@@ -31,7 +31,7 @@ De manera provisional se construyó un ETL que:
 3. Asigna manualmente el reporte (`FK_Reporte`) y el par de cuentas (activo/contra-activo) correspondiente.
 4. Carga el resultado (reemplazo total, delete-then-append) a la tabla `Netsuite.ReclasificacionesContables` en el servidor `DW-GOMEX`, base `RAW_NS`.
 
-La lógica de referencia está prototipada en el notebook [`test/BalanceGeneralPruebas.ipynb`](test/BalanceGeneralPruebas.ipynb), en la sección **"Activo por derecho de uso vehículos"**, que ejemplifica cómo leer, transformar y subir los datos. Este notebook es la implementación de referencia que aún debe portarse a `src/` para productivizarse (ver [CLAUDE.md](CLAUDE.md)).
+La lógica de referencia está prototipada en el notebook [`test/BalanceGeneralPruebas.ipynb`](test/BalanceGeneralPruebas.ipynb), en la sección **"Activo por derecho de uso vehículos"**, que ejemplifica cómo leer, transformar y subir los datos. La implementación se localiza en `src/main.py`
 
 La estructura de la tabla destino está definida en [`src/tablas.sql`](src/tablas.sql):
 
@@ -45,9 +45,7 @@ create table Netsuite.ReclasificacionesContables (
 )
 ```
 
-## Estado
 
-Solo el paso de reclasificaciones manuales (punto 4 arriba) está automatizado hacia SQL Server. El resto del flujo (mapeo Comité-NetSuite + balances de NetSuite) hoy solo produce un Excel de validación (`Resumen.xlsx`) y aún no está integrado al pipeline de carga. Ver [CLAUDE.md](CLAUDE.md) para el detalle técnico de arquitectura, variables de entorno y cómo ejecutar el notebook.
 
 
 
