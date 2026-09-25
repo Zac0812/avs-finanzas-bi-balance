@@ -180,6 +180,7 @@ join Niveles n on m.FK_PL_Nivel_Base=n.ID_Rubro and m.FK_Reporte=n.FK_Reporte
 
 
 
+
 ---BI Balance--- CORPORATIVO (ARIETE+BRM+CARFIX)
 -- 3. Declaramos e inicializamos la variable
 DECLARE @FK_ReporteBalance INT = 5;
@@ -213,7 +214,7 @@ Niveles as (
 	--L1
 	join Netsuite.Accounts_Levels l1 on l2.ID_Padre=l1.ID_Rubro and l2.FK_Reporte=l1.FK_Reporte
 	--Filtramos para tener el reporte que nos interesa dados el nivel inferior 
-	where l3.FK_Reporte=@FK_ReporteBalance and l3.Nivel=3
+	where l3.FK_Reporte= @FK_ReporteBalance and l3.Nivel=3
 ),
 --Mapeo de Cuentas de P&L para el rubro de Resultados del Ejercicio (ID_Rubro 245) del balance
 MapeoBalance as (
@@ -240,7 +241,10 @@ join Cuentas a on m.Internal_Id=a.Internal_Id
 join Niveles n on m.FK_PL_Nivel_Base=n.ID_Rubro and m.FK_Reporte=n.FK_Reporte
 --order by n.OrdenL1 asc,n.OrdenL2 asc, n.OrdenL3 asc
 union all
-select 99989,NULL,'Traspaso Resultados Ejercicios Anteriores','Traspaso Resultados Ejercicios Anteriores','Capital Contable','Resultados Acumulados','Resultados Acumulados',3,7,37
+--Traspaso: toma los Orden L1/L2/L3 del rubro real Resultados Acumulados (antes fijos 3,7,41, se desfasaban si cambiaba el catalogo)
+select top 1 99989,NULL,'Traspaso Resultados Ejercicios Anteriores','Traspaso Resultados Ejercicios Anteriores',n.L1,n.L2,n.L3,n.OrdenL1,n.OrdenL2,n.OrdenL3
+from Niveles n
+where n.L1='Capital Contable' and n.L3='Resultados Acumulados'
 union all
 select 99990,NULL,NULL,'Pasivo+Capital','Pasivo+Capital',NULL,NULL,98,998,9998
 union all

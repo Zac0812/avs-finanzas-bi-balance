@@ -1,0 +1,27 @@
+{
+  "name": "Grupo Gomex - Balance General",
+  "dataColors": ["#2563EB", "#16A34A", "#DC2626", "#64748B", "#0F172A", "#93C5FD", "#86EFAC", "#FCA5A5", "#CBD5E1", "#1E293B"],
+  "background": "#F8FAFC",
+  "foreground": "#1E293B",
+  "tableAccent": "#2563EB",
+  "good": "#16A34A",
+  "bad": "#DC2626",
+  "neutral": "#64748B",
+  "maximum": "#2563EB",
+  "center": "#94A3B8",
+  "minimum": "#DC2626",
+  "textClasses": {
+    "callout": { "color": "#0F172A", "fontFace": "Segoe UI" },
+    "title": { "color": "#0F172A", "fontFace": "Segoe UI Semibold" },
+    "header": { "color": "#FFFFFF", "fontFace": "Segoe UI Semibold" },
+    "label": { "color": "#1E293B", "fontFace": "Segoe UI" }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [{ "color": { "solid": { "color": "#FFFFFF" } } }],
+        "border": [{ "show": true, "color": { "solid": { "color": "#E2E8F0" } }, "radius": 8 }]
+      }
+    }
+  }
+}

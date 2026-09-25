@@ -1,0 +1,46 @@
+{
+  "name": "Grupo Gomex Financial",
+  "dataColors": [
+    "#2563EB",
+    "#1E293B",
+    "#16A34A",
+    "#DC2626",
+    "#64748B",
+    "#94A3B8"
+  ],
+  "good": "#16A34A",
+  "neutral": "#64748B",
+  "bad": "#DC2626",
+  "maximum": "#16A34A",
+  "center": "#2563EB",
+  "minimum": "#DC2626",
+  "background": "#F8FAFC",
+  "foreground": "#1E293B",
+  "tableAccent": "#2563EB",
+  "firstLevelElements": "#1E293B",
+  "secondLevelElements": "#64748B",
+  "thirdLevelElements": "#E2E8F0",
+  "fourthLevelElements": "#CBD5E1",
+  "textClasses": {
+    "callout": {
+      "fontSize": 28,
+      "fontFace": "Segoe UI",
+      "color": "#0F172A"
+    },
+    "title": {
+      "fontSize": 14,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#0F172A"
+    },
+    "header": {
+      "fontSize": 11,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#1E293B"
+    },
+    "label": {
+      "fontSize": 10,
+      "fontFace": "Segoe UI",
+      "color": "#64748B"
+    }
+  }
+}
