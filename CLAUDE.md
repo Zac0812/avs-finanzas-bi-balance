@@ -35,7 +35,7 @@ Requires local ODBC drivers to be installed for `pyodbc` to connect:
 Config is loaded via `python-dotenv` from a git-ignored `.env`. Required variables:
 - `GOOGLE_CREDENTIALS` — path to the Google service account JSON (see `credenciales/`, git-ignored)
 - `ORACLE_USER`, `ORACLE_PASS`, `ORACLE_HOST`, `ORACLE_PORT`, `ORACLE_ROLE_ID`, `ORACLE_ACCOUNT_ID` — NetSuite (via Oracle ODBC) connection
-- `DW_SERVER`, `DW_DB_Netsuite` — target SQL Server data warehouse (`DW-GOMEX` / `RAW_NS`)
+- `DW_SERVER`, `DW_DB_Netsuite` — target SQL Server data warehouse (`DWH1-GOMEX` / `RAW_NS`)
 
 Never read or print `.env` or `credenciales/*.json` contents back to the user.
 
@@ -48,7 +48,7 @@ The pipeline joins three sources and lands the result in one DW table:
 3. **NetSuite transaction balances** — a NetSuite SQL query aggregates `transactionLine`/`TransactionAccountingLine` by account, accounting period, subsidiary (`subsidiary = 2`) into monthly net amounts, filtered to the account IDs resolved in step 2.
 4. **Manual reclassification sheet** (separate Google Sheet, tab `data autos propiedad`) — accounting's manual adjustments (currently just "Activo por derecho de uso vehiculos"), which have no account ID or period key of their own. The notebook derives monthly deltas from the sheet's cumulative amounts (`.diff()`), assigns a hardcoded `FK_Reporte` and pair of `IdCuenta` values (asset/contra-asset split), and produces rows shaped like the DW target table.
 
-Only step 4's output is currently loaded to SQL Server, into `Netsuite.ReclasificacionesContables` (schema in [src/tablas.sql](src/tablas.sql): `FK_Reporte`, `PeriodoContable`, `IdCuenta`, `Monto`, `Nota`) on server `DW-GOMEX`, database `RAW_NS`. Loading is delete-then-append per `load_dataframe_to_sql` (whole-table `DELETE`/`TRUNCATE` + `df.to_sql` in one transaction) — there is no incremental/upsert logic, so any load is a full replace.
+Only step 4's output is currently loaded to SQL Server, into `Netsuite.ReclasificacionesContables` (schema in [src/tablas.sql](src/tablas.sql): `FK_Reporte`, `PeriodoContable`, `IdCuenta`, `Monto`, `Nota`) on server `DWH1-GOMEX`, database `RAW_NS`. Loading is delete-then-append per `load_dataframe_to_sql` (whole-table `DELETE`/`TRUNCATE` + `df.to_sql` in one transaction) — there is no incremental/upsert logic, so any load is a full replace.
 
 Steps 1–3 (`df_MapeoBalance`, `df_Balance`, `df_resumen`) currently only produce a local Excel summary (`Resumen.xlsx`) for validation — they are not yet part of an automated load. When extending this pipeline, keep new account-hierarchy/aggregation logic aligned with this existing merge pattern (account number is the join key between NetSuite and the mapping sheet; NetSuite account `id` is the join key between the mapping sheet and transaction balances).
 

@@ -33,7 +33,7 @@ De manera provisional se construyó un ETL que:
 1. Extrae la información del sheet de reclasificaciones.
 2. Deriva montos mensuales a partir de los saldos acumulados de la pestaña (`.diff()`).
 3. Asigna manualmente el reporte (`FK_Reporte`) y el par de cuentas (activo/contra-activo) correspondiente.
-4. Carga el resultado (reemplazo total, delete-then-append) a la tabla `Netsuite.ReclasificacionesContables` en el servidor `DW-GOMEX`, base `RAW_NS`.
+4. Carga el resultado (reemplazo total, delete-then-append) a la tabla `Netsuite.ReclasificacionesContables` en el servidor `DWH1-GOMEX`, base `RAW_NS`.
 
 La lógica de referencia está prototipada en el notebook [`test/BalanceGeneralPruebas.ipynb`](test/BalanceGeneralPruebas.ipynb), en la sección **"Activo por derecho de uso vehículos"**, que ejemplifica cómo leer, transformar y subir los datos. La implementación se localiza en `src/main.py`
 

@@ -1,6 +1,6 @@
 
 
-#Server: DW-GOMEX
+#Server: DWH1-GOMEX
 #DB: RAW_NS
 
 USE RAW_NS
